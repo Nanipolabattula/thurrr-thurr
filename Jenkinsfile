@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Nanipolabattula/thurrr-thurr.git'
+                git 'https://github.com/Nanipolabattula/thurrr-thurr.git'
             }
         }
 
@@ -22,15 +22,11 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo '🚀 Deploying application...'
+                echo '🚀 Deploying Node.js app...'
+                sh 'pm2 stop all || true'                  // Stop any running app (optional)
+                sh 'pm2 start app.js'                      // Start your Node.js app (adjust filename as needed)
             }
         }
     }
 }
-
-
-
-
-
-
 
