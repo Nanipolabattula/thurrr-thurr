@@ -4,27 +4,33 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Nanipolabattula/thurrr-thurr.git'
+                git 'https://github.com/Nanipolabattula/thurrr-thurr.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                dir('simple-node-app') {
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'npm test || echo "No tests defined."'
+                dir('simple-node-app') {
+                    sh 'npm test || echo "No tests defined."'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                echo '🚀 Deploying application...'
-                // Example deploy command:
-                // sh 'scp -r ./dist ubuntu@yourserver:/var/www/html'
+                dir('simple-node-app') {
+                    echo '🚀 Deploying Node.js app...'
+                    sh 'pm2 stop all || true'
+                    sh 'pm2 start app.js'
+                }
             }
         }
     }
