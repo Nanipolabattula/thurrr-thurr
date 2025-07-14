@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/Nanipolabattula/thurrr-thurr.git'
+                git branch: 'main', url: 'https://github.com/Nanipolabattula/thurrr-thurr.git'
             }
         }
 
@@ -22,8 +22,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo '🚀 Starting Node.js app...'
-                sh 'nohup node app.js &'
+                echo '🚀 Deploying application...'
+                // Example deploy command:
+                // sh 'scp -r ./dist ubuntu@yourserver:/var/www/html'
             }
         }
     }
