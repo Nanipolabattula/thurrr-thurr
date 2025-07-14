@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/Nanipolabattula/thurrr-thurr.git'
+                git branch: 'main', url: 'https://github.com/Nanipolabattula/thurrr-thurr.git'
             }
         }
 
@@ -23,22 +23,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '🚀 Deploying application...'
-                // Example real deploy command:
-                // sh 'scp -r ./dist ubuntu@server:/var/www/html'
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
